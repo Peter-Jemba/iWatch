@@ -1,0 +1,6 @@
+# created by virtualenv automatically
+Scripts
+Lib
+.vscode
+__pycache__
+ToDo.md

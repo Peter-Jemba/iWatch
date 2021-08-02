@@ -1,0 +1,7 @@
+Rating: {% if value %}{{ value }}{% else %}~{% endif %}
+{% if form %}
+<form method='POST' action='/object-rate/'>{% csrf_token %}
+{{ form }}
+<input type='submit' value='Rate' />
+</form>
+{% endif %}

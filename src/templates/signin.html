@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static from static %}
+{% block css_block %}
+<link href="{% static "css/signin/sign.css" %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+{% load static %}
+<a class="logo" href="https://www.netflix.com/" target="_blank"><img src="{% static 'img/iwatc.png' %}"/></a>
+
+<form class="login" method="POST" action="{% url "signin" %}">
+  {% csrf_token %}
+  <h1 class="login__title">Sign In</h1>
+  <div class="login__group">
+    <input class="login__group__input" name="username" type="text" required="true"/>
+    <label class="login__group__label">Username</label>
+  </div>
+  <div class="login__group">
+    <input class="login__group__input" name="password" type="password" required="true"/>
+    <label class="login__group__label">Password</label>
+  </div>
+  <button class="login__sign-in" type="submit">Sign In</button>
+  <div class="login__secondary-cta"><a class="login__secondary-cta__text" href="#">Remember me</a><a class="login__secondary-cta__text login__secondary-cta__text--need-help" href="#">Need help?</a></div>
+  <div class="login__secondary-cta"><a class="login__secondary-cta__text login__secondary-cta__text--new-to-iWatch">New to iWatch?</a><a class="login__secondary-cta__text login__secondary-cta__text--sign-up-now" href="{% url 'signup' %}">Sign up now</a></div>
+</form>
+{% endblock %}

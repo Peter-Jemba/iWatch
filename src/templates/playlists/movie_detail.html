@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load rating %}
+{% load static from static %}
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/movie.css' %}">
+{% endblock %}
+
+{% block head_title %}
+    {{ object.title }} /
+    {{ block.super }}
+{% endblock %}
+
+
+
+{% block content %}
+{% load static %}
+<a class="logo" href="{% url 'movies'%}"><img src="{% static 'img/iwatc.png' %}"/></a>
+<div class="tvshow-container">
+<h1 style="margin-top: 45px;">{{ object.title }}</h1>
+<main style="z-index: -10;)">
+  <div class="background"></div>
+  <div class="foreground"></div>
+  {% rating object=object %}
+
+
+<div class="item">
+<a> {{ object.get_short_display }}</a>
+
+<a>{% include 'videos/embed.html' with video_id=object.get_video_id %}</a>
+
+</div>
+</div>
+</main>
+{% endblock %}

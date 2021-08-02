@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static from static %}
+{% block css_block %}
+	<link href="{% static "css/signup.css" %}" rel="stylesheet">
+{% endblock %} 
+{% block content %}
+{% load static %}
+<a class="logo" href="https://www.netflix.com/" target="_blank"><img src="{% static 'img/iwatc.png' %}"/></a>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet' type='text/css'>
+<form method="POST" action="{% url 'signup' %}"> {%csrf_token%}
+<div class='login'>
+  <h2>Sign Up</h2>
+  <input name='username' placeholder='Username' type='text'>
+  <input name='email' placeholder='Email' type='text'>
+  <input id='pw' name='password' placeholder='Password' type='password'>
+  <input class='animated' type='submit' value='Sign up'>
+  <a class='forgot' href="{% url "signin" %}">Already have an account?</a>
+</div>
+</form>
+    
+
+{% endblock %}

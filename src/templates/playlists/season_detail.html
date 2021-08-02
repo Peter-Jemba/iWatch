@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static from static %}
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/videos.css' %}">
+{% endblock %}
+{% block head_title %}
+    {{object.title }} /
+    {{ block.super }}
+
+{% endblock %}
+
+
+{% block content %}
+{% load static %}
+<a class="logo" href="{% url 'shows' %}"><img src="{% static 'img/iwatc.png' %}"/></a>
+<div style="display: flex;flex-direction: column;align-items: center;background-color: rgba(0,0,0,0.75);" class="container">
+<h1>{{object.title }}</h1>
+<li>{{object.get_short_display }}</li>
+
+<h3>Trailer</h3>
+{% include 'videos/embed.html' with video_id=object.get_video_id %}
+
+<h3>Episodes</h3>
+{% for playlist_item in object.get_episodes %}
+<h5>Episode {{ playlist_item.order }}</h5>
+    <a class="item">{% include 'videos/embed.html' with video_id=playlist_item.video.get_video_id %}</a>
+{% endfor %}
+</div>
+{% endblock %}

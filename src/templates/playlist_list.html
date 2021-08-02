@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static from static %}
+{% block css_block %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/playlist.css' %}">
+{% endblock %}
+{% block head_title %}
+    {% if title %}
+    {{ title }} /
+    {% endif %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+  <a class="logo" href="{% url 'shows' %}"><img src="{% static 'img/iwatc.png' %}"/></a>
+  <img class="background" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg"/>
+  <div style="background-color:rgba(0,0,0,0.75)">
+    {% if title %}
+        <h1>{{ title }}</h1>
+    {% endif %}
+          <form method='GET' action='/search/'>
+              <input type='text' name='q' placeholder='Search for a movie or tv show' style="margin-bottom: 5px;">
+              <button type='submit'>Search</button>
+          </form>
+      <div class="album py-5 bg-light">
+        <div class="container" style="background-color: rgb(0 2 7 / 97%);">
+          <div class="row">
+                {% for instance in object_list %}
+                  <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                    <a href="{{  instance.get_absolute_url }}"><h3 style="color:rgb(3, 15, 182);" >{{ instance.title }} </h3></a>
+                      <a style="padding-top:20px;">{% include 'videos/embed.html' with video_id=instance.get_video_id %}</a>
+                      <p style="color:black;">{{ instance.description }}</p>
+                      <div class="card-body">
+                        {% comment %} <p style="color:green;" >{{ instance.description }}</p> {% endcomment %}
+                        {% comment %} <p style="color:green;" class="card-text">{{ instance.description }}</p> {% endcomment %}
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            {% comment %} <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> {% endcomment %}
+                          </div>
+                          <!-- <small class="text-muted">9 mins</small> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
